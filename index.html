@@ -25,7 +25,7 @@
     <a class="brand" href="./"><img src="assets/icon.png" alt="" width="30" height="30">NutriPrep</a>
     <nav aria-label="Hauptmenü">
       <a href="#kreislauf"><span class="de">So geht’s</span><span class="en">How it works</span></a>
-      <a href="#vorrat"><span class="de">Funktionen</span><span class="en">Features</span></a>
+      <a href="funktionen.html"><span class="de">Funktionen</span><span class="en">Features</span></a>
       <a href="#fragen"><span class="de">Fragen</span><span class="en">FAQ</span></a>
       <a href="support.html">Support</a>
     </nav>
@@ -57,72 +57,22 @@
   <div class="fan">
     <div class="sticker"><img src="assets/icon.png" alt=""><span>BETA</span></div>
 
-    <!-- Karte 1: Vorrat.  Echter Screenshot später: <img class="shot" src="assets/screens/vorrat.png" alt=""> in .ui einsetzen -->
     <div class="card"><span class="tagline"><span class="de">Vorrat</span><span class="en">Pantry</span></span>
-      <div class="ui">
-        <div class="t"><span class="de">Küche</span><span class="en">Kitchen</span></div>
-        <div class="seg"><b class="on">Vorrat</b><b>Preps</b><b><span class="de">Einkauf</span><span class="en">Shop</span></b></div>
-        <div class="row" style="background:var(--green-soft)"><span>⏰</span><b><span class="de">Bald verbrauchen</span><span class="en">Use soon</span></b><span class="pill warn">2</span></div>
-        <div class="row"><span>🧊</span><b><span class="de">Tiefkühler</span><span class="en">Freezer</span></b><small>9</small></div>
-        <div class="row"><span>🥚</span><b><span class="de">Kühlschrank</span><span class="en">Fridge</span></b><small>14</small></div>
-        <div class="row"><span>🥬</span><b><span class="de">Gemüse</span><span class="en">Veggies</span></b><small>8</small></div>
-        <div class="row"><span>🌾</span><b><span class="de">Vorratsschrank</span><span class="en">Cupboard</span></b><small>23</small></div>
-      </div>
+      <img class="shot" src="assets/screens/kueche-vorrat.jpg" alt="Küche mit Vorrat und „Bald verbrauchen“" data-alt-en="Kitchen with pantry and “use soon”" width="603" height="1311">
     </div>
-    <!-- Karte 2: Rezepte -->
     <div class="card"><span class="tagline"><span class="de">Kochbar</span><span class="en">Ready to cook</span></span>
-      <div class="ui">
-        <div class="t"><span class="de">Rezepte</span><span class="en">Recipes</span></div>
-        <div class="cover" style="background:linear-gradient(135deg,#fdba74,#f97316)">🌶️</div>
-        <div class="row"><b>Chili sin Carne</b><span class="pill">✓ <span class="de">kochbar</span><span class="en">ready</span></span></div>
-        <div class="cover" style="background:linear-gradient(135deg,#86efac,#16a34a)">🥗</div>
-        <div class="row"><b>Teriyaki-Bowl</b><span class="pill warn"><span class="de">1 fehlt</span><span class="en">1 missing</span></span></div>
-      </div>
+      <img class="shot lt" src="assets/screens/rezepte-meine.jpg" alt="Rezepte mit Vorrats-Anteil" data-alt-en="Recipes showing how much is in the pantry" width="603" height="1311"><img class="shot dk" src="assets/screens/dunkel-rezepte.jpg" alt="" width="603" height="1311" loading="lazy">
     </div>
-    <!-- Karte 3: Nutrition (Mitte) -->
     <div class="card"><span class="tagline">Nutrition</span>
-      <div class="ui">
-        <div class="t"><span class="de">Heute</span><span class="en">Today</span></div>
-        <div class="seg"><b class="on"><span class="de">Tag</span><span class="en">Day</span></b><b><span class="de">Woche</span><span class="en">Week</span></b><b><span class="de">Monat</span><span class="en">Month</span></b></div>
-        <div class="rings">
-          <svg viewBox="0 0 120 120" width="118" height="118">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--paper-2)" stroke-width="9"/>
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#16a34a" stroke-width="9" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="98" transform="rotate(-90 60 60)"/>
-            <circle cx="60" cy="60" r="40" fill="none" stroke="var(--paper-2)" stroke-width="9"/>
-            <circle cx="60" cy="60" r="40" fill="none" stroke="#3b82f6" stroke-width="9" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="90" transform="rotate(-90 60 60)"/>
-            <circle cx="60" cy="60" r="28" fill="none" stroke="var(--paper-2)" stroke-width="9"/>
-            <circle cx="60" cy="60" r="28" fill="none" stroke="#f59e0b" stroke-width="9" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="80" transform="rotate(-90 60 60)"/>
-          </svg>
-        </div>
-        <div class="row"><b><span class="de">Passt jetzt</span><span class="en">Fits now</span></b><span class="pill">🍛 Prep</span></div>
-        <div class="row"><span>💧</span><b><span class="de">Wasser</span><span class="en">Water</span></b><small>1,5 / 2,5 L</small></div>
-      </div>
+      <img class="shot lt" src="assets/screens/nutrition-tag.jpg" alt="Nutrition-Tag mit Makro-Ringen" data-alt-en="Nutrition day with macro rings" width="603" height="1311"><img class="shot dk" src="assets/screens/dunkel-nutrition.jpg" alt="" width="603" height="1311" loading="lazy">
     </div>
-    <!-- Karte 4: Einkauf -->
     <div class="card"><span class="tagline"><span class="de">Einkaufsmodus</span><span class="en">Shopping mode</span></span>
-      <div class="ui">
-        <div class="t"><span class="de">Einkauf</span><span class="en">Shopping</span></div>
-        <div class="tiles">
-          <div class="tile"><span>🥦</span>Brokkoli</div>
-          <div class="tile done"><span>🍚</span><span class="de">Reis</span><span class="en">Rice</span></div>
-          <div class="tile"><span>🫘</span><span class="de">Bohnen</span><span class="en">Beans</span></div>
-          <div class="tile"><span>🥛</span>Skyr</div>
-          <div class="tile done"><span>🧅</span><span class="de">Zwiebeln</span><span class="en">Onions</span></div>
-          <div class="tile"><span>🍋</span><span class="de">Zitrone</span><span class="en">Lemon</span></div>
-        </div>
-      </div>
+      <img class="shot" src="assets/screens/einkauf-modus.jpg" alt="Einkaufsmodus mit Kacheln" data-alt-en="Shopping mode with tiles" width="603" height="1311">
     </div>
-    <!-- Karte 5: Wochenplan -->
     <div class="card"><span class="tagline"><span class="de">Wochenplan</span><span class="en">Week plan</span></span>
-      <div class="ui">
-        <div class="t"><span class="de">Woche</span><span class="en">Week</span></div>
-        <div class="days"><span>Mo<i class="p">🍛</i></span><span>Di<i class="p">🍛</i></span><span>Mi<i>🥗</i></span><span>Do<i class="p">🌶️</i></span><span>Fr<i>🌶️</i></span><span>Sa<i></i></span><span>So<i class="p">🍳</i></span></div>
-        <div class="row"><b><span class="de">Woche füllen</span><span class="en">Fill the week</span></b><span class="pill">＋</span></div>
-        <div class="row"><b><span class="de">Prep-Ideen dieser Woche</span><span class="en">Prep ideas this week</span></b></div>
-        <div class="row"><b><span class="de">Einkauf starten</span><span class="en">Start shopping</span></b><span>›</span></div>
-      </div>
+      <img class="shot" src="assets/screens/rezepte-woche.jpg" alt="Wochenplan" data-alt-en="Week plan" width="603" height="1311">
     </div>
-    <p class="fan-caption"><span class="de">Illustrationen der App · echte Screenshots folgen</span><span class="en">Illustrations of the app · real screenshots coming soon</span></p>
+    <p class="fan-caption"><span class="de">Echte Bildschirme aus der App</span><span class="en">Real screens from the app (German version)</span></p>
   </div>
 </div>
 
@@ -157,15 +107,9 @@
     </div>
     <div class="art rise">
       <div class="blob"></div>
-      <div class="phone"><div class="ui">
-        <div class="t">Preps</div>
-        <div class="row"><span>🍛</span><b>Curry</b><small>4 ×</small></div>
-        <div class="row"><span>🌶️</span><b>Chili sin Carne</b><small>3 ×</small></div>
-        <div class="row"><span>🥣</span><b>Overnight Oats</b><small>2 ×</small></div>
-        <div class="row" style="margin-top:6px"><b><span class="de">Essen</span><span class="en">Eat</span></b><span class="pill">520 kcal · 34 g</span></div>
-      </div></div>
-      <div class="float" style="left:2%;top:16%">🧊 <span class="de">Im Frost · 9</span><span class="en">Frozen · 9</span></div>
-      <div class="float" style="right:0;bottom:18%">⏰ <span class="de">Skyr · noch 2 Tage</span><span class="en">Skyr · 2 days left</span></div>
+      <div class="phone"><div class="screen"><img class="shot lt" src="assets/screens/kueche-schrank.jpg" alt="Küche als Schrank mit Kühlschrank, Vorratsschrank und Tiefkühler" data-alt-en="Kitchen as a cupboard with fridge, pantry and freezer" width="603" height="1311" loading="lazy"><img class="shot dk" src="assets/screens/dunkel-kueche.jpg" alt="" width="603" height="1311" loading="lazy"></div></div>
+      <div class="float" style="left:2%;top:16%">🧊 <span class="de">Tür antippen, Fach öffnen</span><span class="en">Tap a door to open it</span></div>
+      <div class="float" style="right:0;bottom:18%">⏰ <span class="de">Bald verbrauchen</span><span class="en">Use soon</span></div>
     </div>
   </div>
 </section>
@@ -186,16 +130,9 @@
     </div>
     <div class="art rise">
       <div class="blob"></div>
-      <div class="phone"><div class="ui">
-        <div class="cover" style="height:120px;background:linear-gradient(135deg,#fdba74,#ea580c);font-size:44px">🌶️</div>
-        <div class="t" style="font-size:15px">Chili sin Carne</div>
-        <div class="row"><small>520 kcal</small><small style="color:#3b82f6">34 g</small><small style="color:#f59e0b">58 g</small><small style="color:#ef4444">12 g</small></div>
-        <div class="bar"><i style="width:75%;background:var(--green)"></i></div>
-        <div class="row"><b><span class="de">Beilage</span><span class="en">Side</span></b><span class="pill">🍚 <span class="de">Reis</span><span class="en">Rice</span></span></div>
-        <div class="row" style="background:var(--green);color:#fff"><b style="text-align:center"><span class="de">Kochen</span><span class="en">Cook</span></b></div>
-      </div></div>
+      <div class="phone"><div class="screen"><img class="shot" src="assets/screens/rezept-detail.jpg" alt="Rezept Shakshuka mit Nährwerten und Kochen-Knopf" data-alt-en="Shakshuka recipe with nutrition and cook button" width="603" height="1311" loading="lazy"></div></div>
       <div class="float" style="left:0;top:22%">✅ <span class="de">kochbar</span><span class="en">ready to cook</span></div>
-      <div class="float" style="right:2%;bottom:14%">⏱ <span class="de">Schritt 3 · 12 min</span><span class="en">Step 3 · 12 min</span></div>
+      <div class="float" style="right:2%;bottom:14%">⏱ <span class="de">Kochmodus mit Timer</span><span class="en">Cooking mode with timer</span></div>
     </div>
   </div>
 </section>
@@ -214,16 +151,8 @@
     </div>
     <div class="art rise">
       <div class="blob"></div>
-      <div class="phone"><div class="ui">
-        <div class="t"><span class="de">Einkaufen</span><span class="en">Shopping</span></div>
-        <div class="tiles">
-          <div class="tile"><span>🥦</span>Brokkoli</div><div class="tile"><span>🫑</span>Paprika</div>
-          <div class="tile done"><span>🍚</span><span class="de">Reis</span><span class="en">Rice</span></div><div class="tile"><span>🫘</span><span class="de">Bohnen</span><span class="en">Beans</span></div>
-          <div class="tile"><span>🥛</span>Skyr</div><div class="tile done"><span>🥚</span><span class="de">Eier</span><span class="en">Eggs</span></div>
-        </div>
-        <div class="row" style="margin-top:4px"><b><span class="de">Einkauf abschließen</span><span class="en">Finish shopping</span></b><span>›</span></div>
-      </div></div>
-      <div class="float" style="left:2%;bottom:20%">🛒 <span class="de">4 fehlen noch</span><span class="en">4 still missing</span></div>
+      <div class="phone"><div class="screen"><img class="shot" src="assets/screens/einkauf-zettel.jpg" alt="Einkaufszettel mit fehlenden Zutaten" data-alt-en="Shopping list with missing ingredients" width="603" height="1311" loading="lazy"></div></div>
+      <div class="float" style="left:2%;bottom:20%">🛒 <span class="de">Nur, was fehlt</span><span class="en">Only what’s missing</span></div>
     </div>
   </div>
 </section>
@@ -243,15 +172,13 @@
     </div>
     <div class="art rise">
       <div class="blob"></div>
-      <div class="phone"><div class="ui">
-        <div class="t"><span class="de">Heute</span><span class="en">Today</span></div>
-        <div class="row" style="flex-direction:column;align-items:stretch;gap:5px"><b>1’240 / 1’850 kcal</b><div class="bar"><i style="width:67%;background:#16a34a"></i></div></div>
+      <div class="phone"><div class="screen"><img class="shot lt" src="assets/screens/nutrition-tag.jpg" alt="Nutrition mit Makro-Ringen, Wasser und „Passt jetzt“" data-alt-en="Nutrition with macro rings, water and “fits now”" width="603" height="1311" loading="lazy"><img class="shot dk" src="assets/screens/dunkel-nutrition.jpg" alt="" width="603" height="1311" loading="lazy"></div></div>
         <div class="row" style="flex-direction:column;align-items:stretch;gap:5px"><small><span class="de">Eiweiß</span><span class="en">Protein</span> 92 / 120 g</small><div class="bar"><i style="width:77%;background:#3b82f6"></i></div></div>
         <div class="row" style="flex-direction:column;align-items:stretch;gap:5px"><small><span class="de">Kohlenhydrate</span><span class="en">Carbs</span> 130 / 200 g</small><div class="bar"><i style="width:65%;background:#f59e0b"></i></div></div>
         <div class="row" style="flex-direction:column;align-items:stretch;gap:5px"><small><span class="de">Fett</span><span class="en">Fat</span> 38 / 62 g</small><div class="bar"><i style="width:61%;background:#ef4444"></i></div></div>
         <div class="row"><span>🔁</span><b><span class="de">Wie gestern</span><span class="en">Same as yesterday</span></b></div>
       </div></div>
-      <div class="float" style="right:0;top:18%">🎯 <span class="de">Passt jetzt: Curry</span><span class="en">Fits now: curry</span></div>
+      <div class="float" style="right:0;top:18%">🎯 <span class="de">Passt jetzt</span><span class="en">Fits now</span></div>
     </div>
   </div>
 </section>
@@ -271,6 +198,7 @@
       <div class="rise"><span class="e">🚫</span><b><span class="de">Keine Werbung</span><span class="en">No ads</span></b><p><span class="de">Keine Werbung, kein Tracking in der App.</span><span class="en">No ads and no tracking in the app.</span></p></div>
       <div class="rise"><span class="e">🗑️</span><b><span class="de">Deine Daten, deine Wahl</span><span class="en">Your data, your call</span></b><p><span class="de">Einzelne Bereiche oder alles löschen, direkt in der App.</span><span class="en">Delete single areas or everything, right in the app.</span></p></div>
     </div>
+    <p class="rise" style="margin-top:36px"><a class="btn" href="funktionen.html"><span class="de">Alle Funktionen im Detail</span><span class="en">All features in detail</span> →</a></p>
   </div>
 </section>
 
@@ -345,6 +273,7 @@
   <div class="wrap">
     <span>© <span class="year">2026</span> NutriPrep</span>
     <nav aria-label="Rechtliches">
+      <a href="funktionen.html"><span class="de">Funktionen</span><span class="en">Features</span></a>
       <a href="support.html">Support</a>
       <a href="datenschutz.html"><span class="de">Datenschutz</span><span class="en">Privacy</span></a>
       <a href="impressum.html"><span class="de">Impressum</span><span class="en">Legal notice</span></a>

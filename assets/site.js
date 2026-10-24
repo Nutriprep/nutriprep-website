@@ -15,6 +15,10 @@ const setzeSprache = (lang) => {
   root.lang = lang;
   document.querySelectorAll('[data-title-' + lang + ']').forEach((el) => { document.title = el.getAttribute('data-title-' + lang); });
   document.querySelectorAll('[data-ph-' + lang + ']').forEach((el) => { el.placeholder = el.getAttribute('data-ph-' + lang); });
+  document.querySelectorAll('img[data-alt-en]').forEach((el) => {
+    if (!el.dataset.altDe) el.dataset.altDe = el.alt;
+    el.alt = lang === 'en' ? el.dataset.altEn : el.dataset.altDe;
+  });
   document.querySelectorAll('.lang-btn').forEach((b) => { b.textContent = lang === 'de' ? 'EN' : 'DE'; b.setAttribute('aria-label', lang === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'); });
 };
 const gemerkt = lesen('np-lang');
