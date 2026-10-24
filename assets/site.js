@@ -186,5 +186,32 @@ document.querySelectorAll('.show').forEach((abschnitt) => {
   }), { threshold: 0.35 }).observe(video);
 });
 
+// ---------- Stärken: zwei Laufbänder, beim Scrollen schneller, beim Darüberfahren Halt ----------
+const laufReihen = [...document.querySelectorAll('.lauf-reihe')];
+if (laufReihen.length && !ruhig) {
+  const KOPIEN = 4;
+  laufReihen.forEach((r) => {
+    const original = r.innerHTML;
+    r.innerHTML = original.repeat(KOPIEN);
+    [...r.children].slice(r.children.length / KOPIEN).forEach((k) => k.setAttribute('aria-hidden', 'true'));
+    r.addEventListener('pointerenter', () => { r.dataset.halt = '1'; });
+    r.addEventListener('pointerleave', () => { r.dataset.halt = ''; });
+  });
+  const pos = laufReihen.map(() => 0);
+  let tempo = 0, letzteY = scrollY, sichtbar = false;
+  new IntersectionObserver((e) => { sichtbar = e[0].isIntersecting; }).observe(laufReihen[0].parentElement);
+  const lauf = () => {
+    const dy = Math.abs(scrollY - letzteY); letzteY = scrollY;
+    tempo = tempo * 0.9 + dy * 0.25;
+    if (sichtbar) laufReihen.forEach((r, i) => {
+      const breite = r.scrollWidth / KOPIEN;
+      pos[i] = (pos[i] + (r.dataset.halt ? 0 : 0.45 + tempo * 0.3)) % breite;
+      r.style.transform = `translateX(${+r.dataset.dir > 0 ? -pos[i] : -breite + pos[i]}px)`;
+    });
+    requestAnimationFrame(lauf);
+  };
+  lauf();
+}
+
 // ---------- Jahr in der Fußzeile ----------
 document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
