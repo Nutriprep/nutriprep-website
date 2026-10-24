@@ -208,7 +208,7 @@ section { padding: 84px 0; }
 .panel .sig { margin-top: 26px; font-weight: 650; color: #fff; }
 .panel .deco { position: absolute; right: -40px; bottom: -40px; width: 260px; opacity: .12; transform: rotate(-12deg); }
 
-/* Tisch mit freien Plätzen + Warteliste */
+/* Tisch mit freien Plätzen */
 .table { position: relative; text-align: center; padding: 120px 0; }
 .seat {
   position: absolute; width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center;
@@ -217,16 +217,6 @@ section { padding: 84px 0; }
 }
 @keyframes bob { 50% { transform: translateY(-8px) rotate(var(--r, 0deg)); } }
 @media (max-width: 700px) { .seat { width: 44px; height: 44px; font-size: 22px; border-radius: 14px; } .seat.hide-s { display: none; } }
-.signup { max-width: 520px; margin: 30px auto 0; }
-.signup form { display: flex; gap: 8px; flex-wrap: wrap; }
-.signup input[type=email] { flex: 1 1 240px; min-width: 0; padding: 15px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
-.signup .consent { display: flex; gap: 10px; text-align: left; font-size: 14px; color: var(--muted); margin-top: 14px; align-items: flex-start; }
-.signup .consent input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--green); flex: none; }
-.signup .msg { margin-top: 14px; font-weight: 600; min-height: 1.5em; }
-.signup .msg.ok { color: var(--green-ink); }
-.signup .msg.err { color: #dc2626; }
-.hp { position: absolute; left: -5000px; }
-.or { margin-top: 22px; font-size: 15px; color: var(--muted); }
 
 /* Fragen */
 .faq { max-width: 760px; margin: 40px auto 0; }
@@ -250,7 +240,7 @@ section { padding: 84px 0; }
 .dock a { width: 46px; height: 46px; border-radius: 999px; display: grid; place-items: center; text-decoration: none; font-size: 21px; transition: background .2s, transform .15s; position: relative; }
 .dock a:active { transform: scale(.92); }
 .dock a.on { background: var(--green); }
-.dock a.cta { width: auto; padding: 0 16px; font-size: 14px; font-weight: 700; background: var(--ink); color: var(--paper); }
+.dock a.cta { white-space: nowrap; width: auto; padding: 0 16px; font-size: 14px; font-weight: 700; background: var(--ink); color: var(--paper); }
 .dock a .lbl { position: absolute; bottom: 56px; white-space: nowrap; font-size: 12px; font-weight: 600; background: var(--ink); color: var(--paper); padding: 3px 9px; border-radius: 99px; opacity: 0; pointer-events: none; transition: opacity .15s; }
 @media (hover: hover) { .dock a:hover .lbl { opacity: 1; } }
 

@@ -7,7 +7,7 @@ Webseite der iPhone-App NutriPrep. Reines HTML/CSS, ohne Build-Schritt, gehostet
 | `index.html` | Startseite |
 | `datenschutz.html` · `impressum.html` · `support.html` | Pflichtseiten |
 | `assets/style.css` | Aussehen (Farben ganz oben) |
-| `assets/site.js` | Sprache, Hell/Dunkel, Animationen, Warteliste (`WARTELISTE_URL` oben) |
+| `assets/site.js` | Sprache, Hell/Dunkel, Animationen |
 | `assets/screens/` | Platz für echte App-Screenshots |
 | `CNAME` | Domain für GitHub Pages |
 

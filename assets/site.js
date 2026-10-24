@@ -1,10 +1,5 @@
 // NutriPrep Webseite – kleine Helfer. Keine Cookies, kein Tracking.
 
-// ▼ Hier die Brevo-Formular-Adresse eintragen, sobald das Brevo-Konto steht
-//   (Brevo › Kontakte › Formulare › Formular › „Teilen“ › HTML-Code, Wert von action="…").
-//   Solange leer, zeigt das Formular einen freundlichen Hinweis.
-const WARTELISTE_URL = '';
-
 const root = document.documentElement;
 const merken = (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* privater Modus */ } };
 const lesen = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
@@ -14,7 +9,6 @@ const setzeSprache = (lang) => {
   root.dataset.lang = lang;
   root.lang = lang;
   document.querySelectorAll('[data-title-' + lang + ']').forEach((el) => { document.title = el.getAttribute('data-title-' + lang); });
-  document.querySelectorAll('[data-ph-' + lang + ']').forEach((el) => { el.placeholder = el.getAttribute('data-ph-' + lang); });
   document.querySelectorAll('img[data-alt-en]').forEach((el) => {
     if (!el.dataset.altDe) el.dataset.altDe = el.alt;
     el.alt = lang === 'en' ? el.dataset.altEn : el.dataset.altDe;
@@ -114,35 +108,6 @@ const beimScrollen = () => {
 addEventListener('scroll', beimScrollen, { passive: true });
 addEventListener('resize', beimScrollen);
 beimScrollen();
-
-// ---------- Warteliste ----------
-document.querySelectorAll('form.waitlist').forEach((form) => {
-  const msg = form.parentElement.querySelector('.msg');
-  const sag = (de, en, art) => {
-    msg.className = 'msg ' + art;
-    msg.innerHTML = '<span class="de">' + de + '</span><span class="en">' + en + '</span>';
-  };
-  form.addEventListener('submit', async (ev) => {
-    ev.preventDefault();
-    if (form.querySelector('.hp').value) return;
-    if (!WARTELISTE_URL) {
-      sag('Die Warteliste öffnet in den nächsten Tagen. Bis dahin kannst du die Beta über TestFlight ausprobieren.',
-        'The waitlist opens in the next few days. Until then you can try the beta via TestFlight.', 'err');
-      return;
-    }
-    const daten = new FormData(form);
-    daten.append('locale', root.dataset.lang || 'de');
-    daten.append('html_type', 'simple');
-    try {
-      await fetch(WARTELISTE_URL, { method: 'POST', body: daten, mode: 'no-cors' });
-      form.reset();
-      sag('Fast geschafft! Bitte bestätige den Link in der Mail, die wir dir gerade geschickt haben.',
-        'Almost there! Please confirm the link in the email we just sent you.', 'ok');
-    } catch (e) {
-      sag('Das hat nicht geklappt. Bitte versuch es später noch einmal.', 'That didn’t work. Please try again later.', 'err');
-    }
-  });
-});
 
 // ---------- Jahr in der Fußzeile ----------
 document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
