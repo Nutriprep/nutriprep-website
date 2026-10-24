@@ -88,10 +88,39 @@ const dockLinks = dock ? [...dock.querySelectorAll('a[href^="#"]:not(.cta)')] : 
 const ziele = dockLinks.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 const markiereDock = () => {
   if (!dock) return;
-  dock.classList.toggle('show', scrollY > innerHeight * 0.6);
+  dock.classList.toggle('sichtbar', scrollY > innerHeight * 0.6);
   let aktiv = -1;
   ziele.forEach((z, i) => { if (z.getBoundingClientRect().top < innerHeight * 0.45) aktiv = i; });
   dockLinks.forEach((a, i) => a.classList.toggle('on', i === aktiv));
+};
+
+// ---------- Kreislauf: Ring füllt sich beim Scrollen ----------
+const kreis = document.querySelector('.loop-scroll');
+const kreisTeile = kreis && {
+  prog: kreis.querySelector('.prog'),
+  orbit: kreis.querySelector('.orbit'),
+  nummer: kreis.querySelector('.loop-center b'),
+  knoten: [...kreis.querySelectorAll('.loop-node')],
+  schritte: [...kreis.querySelectorAll('.loop-step')],
+  punkte: [...kreis.querySelectorAll('.loop-dots i')],
+};
+let kreisSchritt = -1;
+const drehKreis = () => {
+  if (!kreis) return;
+  const r = kreis.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+  const k = kreisTeile;
+  const umfang = 2 * Math.PI * 120;
+  k.prog.style.strokeDasharray = umfang;
+  k.prog.style.strokeDashoffset = umfang * (1 - p);
+  k.orbit.style.transform = `rotate(${p * 360}deg)`;
+  const schritt = Math.min(3, Math.floor(p * 4));
+  if (schritt === kreisSchritt) return;
+  kreisSchritt = schritt;
+  k.nummer.textContent = '0' + (schritt + 1);
+  k.knoten.forEach((n, i) => { n.classList.toggle('on', i === schritt); n.classList.toggle('done', i < schritt); });
+  k.schritte.forEach((s, i) => s.classList.toggle('on', i === schritt));
+  k.punkte.forEach((d, i) => d.classList.toggle('on', i === schritt));
 };
 
 let wartet = false;
@@ -101,6 +130,7 @@ const beimScrollen = () => {
   requestAnimationFrame(() => {
     if (kopf) kopf.classList.toggle('scrolled', scrollY > 8);
     legeKarten();
+    drehKreis();
     markiereDock();
     wartet = false;
   });
@@ -108,6 +138,53 @@ const beimScrollen = () => {
 addEventListener('scroll', beimScrollen, { passive: true });
 addEventListener('resize', beimScrollen);
 beimScrollen();
+
+// ---------- Funktions-Abschnitte: Video läuft, Reiter laufen mit ----------
+document.querySelectorAll('.show').forEach((abschnitt) => {
+  const video = abschnitt.querySelector('video');
+  const reiter = [...abschnitt.querySelectorAll('.tab')];
+  const texte = [...abschnitt.querySelectorAll('.show-desc p')];
+  const leiste = abschnitt.querySelector('.tabs');
+  if (!video || !reiter.length) return;
+  const starts = reiter.map((r) => parseFloat(r.dataset.t));
+  let aktiv = -1;
+
+  const zeige = (i) => {
+    if (i === aktiv) return;
+    aktiv = i;
+    reiter.forEach((r, j) => { r.classList.toggle('on', j === i); r.setAttribute('aria-selected', j === i); if (j !== i) r.style.setProperty('--p', 0); });
+    texte.forEach((t, j) => t.classList.toggle('on', j === i));
+    // Reiter-Leiste auf dem Handy mitscrollen, ohne die Seite zu bewegen
+    if (leiste.scrollWidth > leiste.clientWidth) {
+      const r = reiter[i];
+      leiste.scrollTo({ left: r.offsetLeft - (leiste.clientWidth - r.offsetWidth) / 2, behavior: ruhig ? 'auto' : 'smooth' });
+    }
+  };
+  const fortschritt = () => {
+    const t = video.currentTime;
+    const dauer = video.duration || starts[starts.length - 1] + 3;
+    let i = 0;
+    starts.forEach((s, j) => { if (t >= s - 0.05) i = j; });
+    zeige(i);
+    const ende = i + 1 < starts.length ? starts[i + 1] : dauer;
+    reiter[i].style.setProperty('--p', Math.min(1, Math.max(0, (t - starts[i]) / (ende - starts[i]))));
+    if (!video.paused) requestAnimationFrame(fortschritt);
+  };
+  video.addEventListener('play', () => requestAnimationFrame(fortschritt));
+  video.addEventListener('seeked', fortschritt);
+  reiter.forEach((r, i) => r.addEventListener('click', () => {
+    video.currentTime = starts[i];
+    zeige(i);
+    video.play().catch(() => {});
+  }));
+  zeige(0);
+
+  // Nur abspielen, wenn der Abschnitt zu sehen ist
+  if (ruhig) { video.removeAttribute('autoplay'); video.addEventListener('click', () => (video.paused ? video.play() : video.pause())); return; }
+  new IntersectionObserver((eintraege) => eintraege.forEach((e) => {
+    if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+  }), { threshold: 0.35 }).observe(video);
+});
 
 // ---------- Jahr in der Fußzeile ----------
 document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
