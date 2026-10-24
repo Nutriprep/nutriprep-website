@@ -123,6 +123,41 @@ const drehKreis = () => {
   k.punkte.forEach((d, i) => d.classList.toggle('on', i === schritt));
 };
 
+// ---------- Bühne: Küche, Rezepte, Nutrition wechseln beim Scrollen ----------
+const szenenBuehne = document.querySelector('.stage');
+const szenen = szenenBuehne ? [...szenenBuehne.querySelectorAll('.szene')] : [];
+const buehnenTabs = szenenBuehne ? [...szenenBuehne.querySelectorAll('.stage-tab')] : [];
+let buehnenIndex = -1;
+let buehneLaeuft = false;
+const segment = () => (szenenBuehne.offsetHeight - innerHeight) / szenen.length;
+const spieleBuehne = () => {
+  szenen.forEach((p, i) => {
+    const v = p.querySelector('video');
+    if (!v) return;
+    if (i === buehnenIndex && buehneLaeuft) v.play().catch(() => {}); else v.pause();
+  });
+};
+const wechsleBuehne = () => {
+  if (!szenenBuehne || ruhig) return;
+  const r = szenenBuehne.getBoundingClientRect();
+  const sichtbar = r.top < innerHeight && r.bottom > 0;
+  const fortschritt = Math.min(0.9999, Math.max(0, -r.top / Math.max(1, r.height - innerHeight))) * szenen.length;
+  const i = Math.floor(fortschritt);
+  buehnenTabs.forEach((t, j) => t.style.setProperty('--p', j === i ? fortschritt - i : 0));
+  if (i !== buehnenIndex) {
+    buehnenIndex = i;
+    szenen.forEach((p, j) => { p.classList.toggle('on', j === i); p.classList.toggle('vorbei', j < i); });
+    buehnenTabs.forEach((t, j) => t.classList.toggle('on', j === i));
+    const v = szenen[i].querySelector('video');
+    if (v) v.currentTime = 0;
+    spieleBuehne();
+  }
+  if (sichtbar !== buehneLaeuft) { buehneLaeuft = sichtbar; spieleBuehne(); }
+};
+buehnenTabs.forEach((t, i) => t.addEventListener('click', () => {
+  scrollTo({ top: szenenBuehne.offsetTop + i * segment() + 4, behavior: ruhig ? 'auto' : 'smooth' });
+}));
+
 let wartet = false;
 const beimScrollen = () => {
   if (wartet) return;
@@ -131,6 +166,7 @@ const beimScrollen = () => {
     if (kopf) kopf.classList.toggle('scrolled', scrollY > 8);
     legeKarten();
     drehKreis();
+    wechsleBuehne();
     markiereDock();
     wartet = false;
   });
@@ -179,6 +215,8 @@ document.querySelectorAll('.show').forEach((abschnitt) => {
   }));
   zeige(0);
 
+  // Auf der Bühne steuert die Bühne das Abspielen
+  if (abschnitt.closest('.stage') && !ruhig) return;
   // Nur abspielen, wenn der Abschnitt zu sehen ist
   if (ruhig) { video.removeAttribute('autoplay'); video.addEventListener('click', () => (video.paused ? video.play() : video.pause())); return; }
   new IntersectionObserver((eintraege) => eintraege.forEach((e) => {

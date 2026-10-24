@@ -95,9 +95,12 @@
   </div>
 </section>
 
-<!-- ================= KUECHE ================= -->
-<section id="kueche" class="show">
-  <div class="show-pin">
+<!-- ================= FUNKTIONEN-BÜHNE ================= -->
+<section class="stage" style="--n:3" aria-label="Funktionen">
+  <span class="stage-anker" id="kueche" style="top:calc(0 * var(--seg))"></span><span class="stage-anker" id="rezepte" style="top:calc(1 * var(--seg))"></span><span class="stage-anker" id="nutrition" style="top:calc(2 * var(--seg))"></span>
+  <div class="stage-pin">
+    <nav class="stage-nav" aria-label="Bereiche"><button class="stage-tab on" data-i="0"><i></i><span class="de">Küche</span><span class="en">Kitchen</span></button><button class="stage-tab" data-i="1"><i></i><span class="de">Rezepte</span><span class="en">Recipes</span></button><button class="stage-tab" data-i="2"><i></i><span class="de">Nutrition</span><span class="en">Nutrition</span></button></nav>
+<div class="szene on show">
   <div class="wrap show-grid">
     <div class="show-copy">
       <p class="kicker"><span class="de">Küche: Vorrat &amp; Einkauf</span><span class="en">Kitchen: pantry &amp; shopping</span></p>
@@ -112,15 +115,11 @@
       <p class="extras"><span class="de">Außerdem:</span><span class="en">Also:</span> <span class="x"><span class="de">Barcode scannen</span><span class="en">Barcode scan</span></span> <span class="x"><span class="de">522 Zutaten</span><span class="en">522 ingredients</span></span> <span class="x"><span class="de">Haltbarkeit</span><span class="en">Best-before</span></span> <span class="x"><span class="de">Favoriten-Regale</span><span class="en">Favourite shelves</span></span></p>
     </div>
     <div class="show-media">
-      <div class="vphone"><video src="assets/videos/kueche.mp4" poster="assets/videos/kueche.jpg" muted playsinline loop autoplay preload="metadata" aria-label="Video: Vorrat und Einkauf in NutriPrep"></video></div>
+      <div class="vphone"><video src="assets/videos/kueche.mp4" poster="assets/videos/kueche.jpg" muted playsinline loop preload="metadata" aria-label="Video: Vorrat und Einkauf in NutriPrep"></video></div>
     </div>
   </div>
-  </div>
-</section>
-
-<!-- ================= REZEPTE ================= -->
-<section id="rezepte" class="show flip">
-  <div class="show-pin">
+</div>
+<div class="szene show flip">
   <div class="wrap show-grid">
     <div class="show-copy">
       <p class="kicker"><span class="de">Rezepte &amp; Kochen</span><span class="en">Recipes &amp; cooking</span></p>
@@ -134,15 +133,11 @@
       <p class="extras"><span class="de">Außerdem:</span><span class="en">Also:</span> <span class="x"><span class="de">Wochenplan</span><span class="en">Week plan</span></span> <span class="x"><span class="de">Passt heute</span><span class="en">Fits today</span></span> <span class="x"><span class="de">Import per KI</span><span class="en">AI import</span></span> <span class="x"><span class="de">Teilen</span><span class="en">Sharing</span></span></p>
     </div>
     <div class="show-media">
-      <div class="vphone"><video src="assets/videos/rezepte.mp4" poster="assets/videos/rezepte.jpg" muted playsinline loop autoplay preload="metadata" aria-label="Video: Rezepte und Kochen in NutriPrep"></video></div>
+      <div class="vphone"><video src="assets/videos/rezepte.mp4" poster="assets/videos/rezepte.jpg" muted playsinline loop preload="metadata" aria-label="Video: Rezepte und Kochen in NutriPrep"></video></div>
     </div>
   </div>
-  </div>
-</section>
-
-<!-- ================= NUTRITION ================= -->
-<section id="nutrition" class="show">
-  <div class="show-pin">
+</div>
+<div class="szene show">
   <div class="wrap show-grid">
     <div class="show-copy">
       <p class="kicker"><span class="de">Nutrition</span><span class="en">Nutrition</span></p>
@@ -156,9 +151,10 @@
       <p class="extras"><span class="de">Außerdem:</span><span class="en">Also:</span> <span class="x"><span class="de">14 Mikronährstoffe</span><span class="en">14 micronutrients</span></span> <span class="x"><span class="de">Statistik</span><span class="en">Stats</span></span> <span class="x"><span class="de">Wie gestern</span><span class="en">Same as yesterday</span></span> <span class="x"><span class="de">Ziele &amp; Gewicht</span><span class="en">Goals &amp; weight</span></span></p>
     </div>
     <div class="show-media">
-      <div class="vphone"><video src="assets/videos/nutrition.mp4" poster="assets/videos/nutrition.jpg" muted playsinline loop autoplay preload="metadata" aria-label="Video: Nutrition in NutriPrep"></video></div>
+      <div class="vphone"><video src="assets/videos/nutrition.mp4" poster="assets/videos/nutrition.jpg" muted playsinline loop preload="metadata" aria-label="Video: Nutrition in NutriPrep"></video></div>
     </div>
   </div>
+</div>
   </div>
 </section>
 

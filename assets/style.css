@@ -327,7 +327,7 @@ footer a:hover { color: var(--ink); }
 .end-cta .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
 
 /* ---------- Kreislauf: Ring füllt sich beim Scrollen ---------- */
-.loop-scroll { padding: 0; height: 420vh; position: relative; }
+.loop-scroll { padding: 0; height: 330vh; position: relative; }
 .loop-pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; align-items: center; overflow: hidden; }
 .loop-grid { display: grid; gap: 18px; justify-items: center; text-align: center; }
 @media (min-width: 900px) {
@@ -471,3 +471,43 @@ footer a:hover { color: var(--ink); }
 .k-tuer i:nth-child(2) { animation-delay: .8s; margin-left: -18px; } .k-tuer i:nth-child(3) { animation-delay: 1.6s; margin-left: 8px; }
 @keyframes k-fall { 0% { transform: translateY(-10px); opacity: 0; } 20% { opacity: 1; } 70% { transform: translateY(34px); opacity: 1; } 80%, 100% { transform: translateY(34px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .k, .k * { animation: none !important; } .lauf-reihe { flex-wrap: wrap; width: auto; justify-content: center; padding: 0 16px; } }
+
+/* ---------- Bühne: Küche, Rezepte, Nutrition wechseln fließend, ohne Lücken ---------- */
+.stage { --seg: 95vh; --seg: 95svh; position: relative; height: calc(100svh + var(--n) * var(--seg)); }
+.stage-anker { position: absolute; left: 0; width: 1px; height: 1px; }
+.stage-pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.stage .show { height: auto; }
+.stage-nav { position: absolute; top: 74px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 85%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.stage-tab { all: unset; cursor: pointer; position: relative; overflow: hidden; padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 650; color: var(--muted); transition: background .35s, color .35s; white-space: nowrap; }
+.stage-tab i { position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--green); transform-origin: left; transform: scaleX(0); }
+.stage-tab.on { background: var(--ink); color: var(--paper); }
+.stage-tab.on i { transform: scaleX(var(--p, 0)); }
+.stage-tab:focus-visible { outline: 3px solid var(--green); }
+.szene { position: absolute; inset: 0; display: grid; align-items: center; padding: 126px 0 24px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .55s ease, visibility 0s linear .55s; }
+.szene.on { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .55s ease, visibility 0s; }
+.szene .show-copy > *, .szene .show-media { transform: translateY(64px); filter: blur(8px); transition: transform .85s cubic-bezier(.2,.8,.2,1), filter .6s ease; }
+.szene.vorbei .show-copy > *, .szene.vorbei .show-media { transform: translateY(-64px); }
+.szene.on .show-copy > *, .szene.on .show-media { transform: none; filter: none; }
+.szene.on .show-copy > :nth-child(2) { transition-delay: .05s; }
+.szene.on .show-copy > :nth-child(3) { transition-delay: .1s; }
+.szene.on .show-copy > :nth-child(4) { transition-delay: .15s; }
+.szene.on .show-media { transition-delay: .06s; }
+.stage .vphone { width: min(300px, 74vw, calc((100svh - 200px) * .46)); }
+@media (max-width: 899px) {
+  .stage-nav { top: 70px; }
+  .stage-tab { padding: 7px 13px; font-size: 13.5px; }
+  .szene { padding: 122px 0 14px; align-items: start; }
+  .stage .vphone { width: min(168px, 43vw, calc((100svh - 330px) * .46)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage { height: auto; } .stage-pin { position: relative; height: auto; overflow: visible; } .stage-nav { display: none; }
+  .szene { position: relative; inset: auto; opacity: 1; visibility: visible; pointer-events: auto; padding: 70px 0; }
+  .szene .show-copy > *, .szene .show-media { transform: none; filter: none; }
+}
+/* Funktionen-Seite: Abschnitte fließen normal, ohne Halt und ohne Lücken */
+.show.frei { height: auto; }
+.show.frei .show-pin { position: relative; height: auto; padding: 70px 0 26px; }
+.show.frei .vphone { width: min(300px, 74vw); }
+@media (max-width: 899px) { .show.frei .show-pin { padding: 56px 0 18px; } .show.frei .vphone { width: min(168px, 43vw); } }
+.chapter-more { padding: 0 0 40px; }
