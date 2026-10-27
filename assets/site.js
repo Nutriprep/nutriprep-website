@@ -16,7 +16,8 @@ const setzeSprache = (lang) => {
   document.querySelectorAll('.lang-btn').forEach((b) => { b.textContent = lang === 'de' ? 'EN' : 'DE'; b.setAttribute('aria-label', lang === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'); });
 };
 const gemerkt = lesen('np-lang');
-setzeSprache(gemerkt || (/^de\b/i.test(navigator.language || 'de') ? 'de' : 'en'));
+const ausLink = new URLSearchParams(location.search).get('lang'); // aus der App: ?lang=de|en
+setzeSprache(ausLink === 'de' || ausLink === 'en' ? ausLink : gemerkt || (/^de\b/i.test(navigator.language || 'de') ? 'de' : 'en'));
 document.querySelectorAll('.lang-btn').forEach((b) => b.addEventListener('click', () => {
   const neu = root.dataset.lang === 'de' ? 'en' : 'de';
   setzeSprache(neu);
