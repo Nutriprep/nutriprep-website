@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://nutriprep.app https://ivdqvnygtmqoianntwsl.supabase.co; connect-src https://ivdqvnygtmqoianntwsl.supabase.co; base-uri 'none'; form-action 'none'">
+<title>Geteiltes Rezept | NutriPrep</title>
+<meta property="og:title" content="Rezept aus NutriPrep">
+<meta property="og:description" content="Öffne das Rezept und übernimm es in deine App.">
+<meta property="og:image" content="https://nutriprep.app/assets/og-bild.jpg">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+main{max-width:640px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#foto{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
+h1{margin:16px 0 6px;font-size:clamp(28px,7vw,40px);text-wrap:balance}
+.eck{color:var(--muted);margin:0 0 18px}
+.knopf{display:block;text-align:center;background:var(--green-panel);color:#fff;font-weight:800;text-decoration:none;padding:14px 16px;border-radius:14px;margin-top:10px}
+.knopf.zwei{background:transparent;color:var(--green-ink);border:1px solid var(--line)}
+section{margin-top:26px}
+h2{font-size:20px;margin:0 0 8px}
+ul,ol{margin:0;padding:0;list-style:none}
+ul li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line)}
+ul li span:last-child{color:var(--muted);white-space:nowrap}
+ol{counter-reset:s}
+ol li{counter-increment:s;padding:8px 0}
+ol li::before{content:counter(s) ". ";font-weight:800}
+.hinweis{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<a href="/" class="hinweis">NutriPrep</a>
+<p id="status" class="hinweis" role="status"></p>
+<article id="rezept" hidden>
+<img id="foto" alt="" hidden>
+<h1 id="name"></h1>
+<p id="eck" class="eck"></p>
+<a id="app" class="knopf"></a>
+<a id="laden" class="knopf zwei" href="https://apps.apple.com/app/id6819398084"></a>
+<section><h2 id="tz"></h2><ul id="zutaten"></ul></section>
+<section id="sb" hidden><h2 id="ts"></h2><ol id="schritte"></ol></section>
+</article>
+</main>
+<script>
+(function(){
+var de=/^de\b/i.test(navigator.language||'');
+var T=de?{laedt:'Rezept wird geladen …',weg:'Dieser Link wurde gelöscht oder ist nicht vollständig.',netz:'Das Rezept konnte nicht geladen werden. Bitte prüfe deine Internetverbindung.',app:'In NutriPrep öffnen',laden:'NutriPrep im App Store',z:'Zutaten',s:'Schritte',port:'Portionen',kcal:'kcal pro Portion',e:'g Eiweiß'}:{laedt:'Loading recipe …',weg:'This link was deleted or is incomplete.',netz:'The recipe could not be loaded. Please check your internet connection.',app:'Open in NutriPrep',laden:'NutriPrep on the App Store',z:'Ingredients',s:'Steps',port:'servings',kcal:'kcal per serving',e:'g protein'};
+document.documentElement.lang=de?'de':'en';
+var $=function(i){return document.getElementById(i)};
+var code=new URLSearchParams(location.search).get('c')||'';
+function meldung(t){$('status').textContent=t}
+if(!/^[a-z0-9]{6,32}$/i.test(code)){meldung(T.weg);return}
+meldung(T.laedt);
+fetch('https://ivdqvnygtmqoianntwsl.supabase.co/rest/v1/rpc/geteiltes_rezept',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_HkVf1B7dAZbGdbXe7wviZg__at4mYbP'},body:JSON.stringify({p_code:code})})
+.then(function(r){if(!r.ok)throw 0;return r.json()})
+.then(function(d){
+if(!d||typeof d.name!=='string'||!Array.isArray(d.ingredients)){meldung(T.weg);return}
+meldung('');document.title=d.name+' | NutriPrep';
+$('name').textContent=d.name;
+var eck=[];if(+d.portions>0)eck.push(d.portions+' '+T.port);
+if(d.proPortion&&+d.proPortion.kcal>0){eck.push(Math.round(d.proPortion.kcal)+' '+T.kcal);eck.push(Math.round(d.proPortion.protein)+' '+T.e)}
+$('eck').textContent=eck.join(' · ');
+$('app').textContent=T.app;$('app').href='nutripreap://r?c='+encodeURIComponent(code);
+$('laden').textContent=T.laden;
+$('tz').textContent=T.z;$('ts').textContent=T.s;
+var erlaubt=/^https:\/\/(nutriprep\.app|ivdqvnygtmqoianntwsl\\.supabase\\.co)\//;
+if(typeof d.photoUri==='string'&&erlaubt.test(d.photoUri)){$('foto').src=d.photoUri;$('foto').alt=d.name;$('foto').hidden=false}
+d.ingredients.forEach(function(z){var li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('span');a.textContent=String(z.name||'');b.textContent=(z.amount!=null?z.amount:'')+' '+String(z.unit||'');li.appendChild(a);li.appendChild(b);$('zutaten').appendChild(li)});
+if(Array.isArray(d.steps)&&d.steps.length){d.steps.forEach(function(s){var li=document.createElement('li');li.textContent=String(s.text||'');$('schritte').appendChild(li)});$('sb').hidden=false}
+$('rezept').hidden=false;
+}).catch(function(){meldung(T.netz)});
+})();
+</script>
+</body>
+</html>

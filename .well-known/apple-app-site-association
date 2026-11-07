@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "6CHFNBMF3K.com.nutriprep.app",
+        "appIDs": ["6CHFNBMF3K.com.nutriprep.app"],
+        "paths": ["/r", "/r/", "/r/*"],
+        "components": [{ "/": "/r/*" }, { "/": "/r" }]
+      }
+    ]
+  }
+}
